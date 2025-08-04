@@ -22,6 +22,18 @@ function ManagerHomePage() {
     navigate('/createUpdateManager');
   };
 
+  const handleStudentDetails = () => {
+    navigate('/studentDetails');
+  };
+
+  const handleSchoolFeesDetails = () => {
+    navigate('/schoolFeesDetails');
+  };
+
+  const handleTransportFeesDetails = () => {
+    navigate('/transportFeesDetails');
+  };
+
   const handleLogout = () => {
     fetch('http://127.0.0.1:4000/auth/logout', {
       method: 'POST',
@@ -83,12 +95,30 @@ function ManagerHomePage() {
             ))}
           </div>
 
-          <div style={styles.buttonContainer}>
+          <div style={styles.actionButtonsContainer}>
             <button
               onClick={handleCreateUpdateManagers}
               style={styles.managerButton}
             >
-              Create or Update Managers
+              Create/Update Managers
+            </button>
+            <button
+              onClick={handleStudentDetails}
+              style={styles.studentDetailsButton}
+            >
+              Student Details
+            </button>
+            <button
+              onClick={handleSchoolFeesDetails}
+              style={styles.schoolFeesButton}
+            >
+              School Fees Details
+            </button>
+            <button
+              onClick={handleTransportFeesDetails}
+              style={styles.transportFeesButton}
+            >
+              Transport Fees Details
             </button>
           </div>
         </div>
@@ -210,13 +240,25 @@ const styles = {
     margin: '0.5rem 0 0 0',
     fontStyle: 'italic'
   },
-  buttonContainer: {
+  actionButtonsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '1rem',
     width: '100%',
-    maxWidth: '400px',
-    margin: '0 auto'
+    maxWidth: '1000px',
+    margin: '0 auto',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+    padding: '0.5rem 0',
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    '::-webkit-scrollbar': {
+      display: 'none'
+    }
   },
   managerButton: {
-    width: '100%',
+    flex: '1 0 auto',
+    minWidth: '200px',
     padding: '1rem',
     background: '#bfa700',
     color: 'white',
@@ -231,6 +273,63 @@ const styles = {
       background: '#a38a00',
       transform: 'translateY(-2px)',
       boxShadow: '0 6px 12px rgba(191, 167, 0, 0.3)'
+    }
+  },
+  studentDetailsButton: {
+    flex: '1 0 auto',
+    minWidth: '200px',
+    padding: '1rem',
+    background: '#e74c3c',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 8px rgba(231, 76, 60, 0.2)',
+    ':hover': {
+      background: '#c0392b',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 12px rgba(231, 76, 60, 0.3)'
+    }
+  },
+  schoolFeesButton: {
+    flex: '1 0 auto',
+    minWidth: '200px',
+    padding: '1rem',
+    background: '#3498db',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 8px rgba(52, 152, 219, 0.2)',
+    ':hover': {
+      background: '#2980b9',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 12px rgba(52, 152, 219, 0.3)'
+    }
+  },
+  transportFeesButton: {
+    flex: '1 0 auto',
+    minWidth: '200px',
+    padding: '1rem',
+    background: '#2ecc71',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 8px rgba(46, 204, 113, 0.2)',
+    ':hover': {
+      background: '#27ae60',
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 12px rgba(46, 204, 113, 0.3)'
     }
   }
 };

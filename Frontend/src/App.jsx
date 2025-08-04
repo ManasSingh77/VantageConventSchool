@@ -5,6 +5,9 @@ import SelectDashboard from './HomePage/SelectDashboard';
 import ManagerHomePage from './HomePage/ManagerHomePage';
 import CreateUpdateManager from './HomePage/CreateUpdateManager';
 import StudentDashboard from './StudentFees/StudentFeesDashboard';
+import StudentDetails from './Manager/StudentDetails';
+import CreateStudentDetails from './Manager/CreateStudentDetails';
+import StudentDetailPage from './Manager/StudentDetailPage';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
@@ -43,9 +46,12 @@ function App() {
       <Routes>
         <Route path="/" element={!authUser ? <MainPage /> : <Navigate to="/manager" />} />
         <Route path="/selectDashboard" element={!authUser ? <SelectDashboard /> : <Navigate to="/manager" />} />
-        <Route path="/manager" element={managerType === "manager" ? <ManagerHomePage /> : <Navigate to="/" />} />
-        <Route path="/createUpdateManager" element={managerType === "manager" ? <CreateUpdateManager /> : <Navigate to="/" />} />
+        <Route path="/manager" element={managerType === "manager" && <ManagerHomePage />} />
+        <Route path="/createUpdateManager" element={managerType === "manager" && <CreateUpdateManager />} />
         <Route path="/studentDashboard" element={ (managerType==="manager" || managerType === "school-fees")  && <StudentDashboard />} />
+        <Route path="/studentDetails" element={managerType==="manager" && <StudentDetails />} />
+        <Route path="/createStudent" element={managerType==="manager" && <CreateStudentDetails />} />
+        <Route path="/studentDetails/:id" element={ managerType==="manager" && <StudentDetailPage />} />
       </Routes>
       <Toaster />
     </BrowserRouter>
