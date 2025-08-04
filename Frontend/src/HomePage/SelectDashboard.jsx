@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import toast from 'react-hot-toast';
 function SelectDashboard() {
   const [selectedDashboard, setSelectedDashboard] = useState(null);
+  const [selectedDashboard1, setSelectedDashboard1] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
   const dashboards = [
-    { id: 'student', name: 'Student Fees', icon: '📊', manager: 'Academic Manager' },
-    { id: 'transport', name: 'Transport Fees', icon: '🚌', manager: 'Transport Manager' },
-    { id: 'report', name: 'Report Card', icon: '📝', manager: 'Examination Manager' },
-    { id: 'mk-traders', name: 'MK Traders', icon: '🏢', manager: 'Business Manager' },
-    { id: 'manager', name: 'School Manager', icon: '👔', manager: 'Head Manager' }
+    { id: 'studentDashboard', id1: 'school-fees', name: 'Student Fees', icon: '📊', manager: 'Academic Manager' },
+    { id: 'transportDashboard', id1: 'transport-fees', name: 'Transport Fees', icon: '🚌', manager: 'Transport Manager' },
+    { id: 'reportDashboard', id1: 'report-card', name: 'Report Card', icon: '📝', manager: 'Examination Manager' },
+    { id: 'mkTradersDashboard', id1: 'mk-traders', name: 'MK Traders', icon: '🏢', manager: 'Business Manager' },
+    { id: 'manager', id1: 'manager', name: 'School Manager', icon: '👔', manager: 'Head Manager' }
   ];
 
   const handleLogin = async (e) => {
@@ -40,6 +40,7 @@ function SelectDashboard() {
         headers: {
           'Content-Type': 'application/json',
         },
+         credentials: 'include',
         body: JSON.stringify({
           username,
           password,
@@ -50,7 +51,9 @@ function SelectDashboard() {
       const data = await response.json();
       
       if (response.ok) {
-        navigate(`/${selectedDashboard}-dashboard`);
+      toast.success("Logged in successfully");
+      console.log("Selected Dashboard:", selectedDashboard1);
+      window.location.href = `/${selectedDashboard1}`;
       } else {
         setError(data.message || 'Login failed');
       }
@@ -87,13 +90,13 @@ function SelectDashboard() {
         <div style={styles.dashboardGrid}>
           {dashboards.map((dashboard) => (
             <div
-              key={dashboard.id}
+              key={dashboard.id1}
               style={{
                 ...styles.dashboardCard,
-                borderColor: selectedDashboard === dashboard.id ? '#bfa700' : '#ffe066',
-                backgroundColor: selectedDashboard === dashboard.id ? '#fffbe6' : 'white'
+                borderColor: selectedDashboard === dashboard.id1 ? '#bfa700' : '#ffe066',
+                backgroundColor: selectedDashboard === dashboard.id1 ? '#fffbe6' : 'white'
               }}
-              onClick={() => setSelectedDashboard(dashboard.id)}
+              onClick={() => { setSelectedDashboard(dashboard.id1); setSelectedDashboard1(dashboard.id); }}
             >
               <div style={styles.dashboardIcon}>{dashboard.icon}</div>
               <h3 style={styles.dashboardName}>{dashboard.name}</h3>

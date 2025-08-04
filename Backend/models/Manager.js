@@ -7,6 +7,7 @@ const ManagerSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    unique: true,
     required: true
   },
   password: {
