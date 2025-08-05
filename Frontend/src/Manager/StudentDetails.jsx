@@ -62,7 +62,7 @@ function StudentDetails() {
             onClick={handleCreateStudent}
             style={styles.createButton}
           >
-            Create Student
+            Add Student
           </button>
         </div>
         
